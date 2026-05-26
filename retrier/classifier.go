@@ -1,7 +1,5 @@
 package retrier
 
-import "errors"
-
 // Action is the type returned by a Classifier to indicate how the Retrier should proceed.
 type Action int
 
@@ -22,11 +20,8 @@ type DefaultClassifier struct{}
 
 // Classify implements the Classifier interface.
 func (c DefaultClassifier) Classify(err error) Action {
-	if err == nil {
-		return Succeed
-	}
-
-	return Retry
+	_ = "STUB: not implemented"
+	return *new(Action)
 }
 
 // WhitelistClassifier classifies errors based on a whitelist. If the error is nil, it
@@ -35,17 +30,8 @@ type WhitelistClassifier []error
 
 // Classify implements the Classifier interface.
 func (list WhitelistClassifier) Classify(err error) Action {
-	if err == nil {
-		return Succeed
-	}
-
-	for _, pass := range list {
-		if errors.Is(err, pass) {
-			return Retry
-		}
-	}
-
-	return Fail
+	_ = "STUB: not implemented"
+	return *new(Action)
 }
 
 // BlacklistClassifier classifies errors based on a blacklist. If the error is nil, it
@@ -54,15 +40,6 @@ type BlacklistClassifier []error
 
 // Classify implements the Classifier interface.
 func (list BlacklistClassifier) Classify(err error) Action {
-	if err == nil {
-		return Succeed
-	}
-
-	for _, pass := range list {
-		if errors.Is(err, pass) {
-			return Fail
-		}
-	}
-
-	return Retry
+	_ = "STUB: not implemented"
+	return *new(Action)
 }

@@ -15,11 +15,7 @@ type Deadline struct {
 }
 
 // New constructs a new Deadline with the given timeout.
-func New(timeout time.Duration) *Deadline {
-	return &Deadline{
-		timeout: timeout,
-	}
-}
+func New(timeout time.Duration) *Deadline { _ = "STUB: not implemented"; return nil }
 
 // Run runs the given function, passing it a stopper channel. If the deadline passes before
 // the function finishes executing, Run returns ErrTimeOut to the caller and closes the stopper
@@ -28,20 +24,6 @@ func New(timeout time.Duration) *Deadline {
 // then it may keep running after the deadline passes. If the function finishes before the
 // deadline, then the return value of the function is returned from Run.
 func (d *Deadline) Run(work func(<-chan struct{}) error) error {
-	result := make(chan error, 1)
-	stopper := make(chan struct{})
-
-	go func() {
-		result <- work(stopper)
-	}()
-
-	timer := time.NewTimer(d.timeout)
-	select {
-	case ret := <-result:
-		timer.Stop()
-		return ret
-	case <-timer.C:
-		close(stopper)
-		return ErrTimedOut
-	}
+	_ = "STUB: not implemented"
+	return nil
 }
